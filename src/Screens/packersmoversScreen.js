@@ -22,6 +22,8 @@ import {
 import Geolocation from 'react-native-get-location';
 
 
+
+//Sample Data
 const packersData = [
     {
         Name: 'Packer-1',
@@ -53,7 +55,7 @@ const packersData = [
 ]
 
 
-
+//accessing users location 
 const PackersmoversScreen = () => {
 
     const [packers, setpackers] = useState([])
@@ -65,7 +67,8 @@ const PackersmoversScreen = () => {
 
 
 
-
+  
+//accessing users location 
     Geolocation.getCurrentPosition({
         enableHighAccuracy: true,
         timeout: 15000,
@@ -82,9 +85,9 @@ const PackersmoversScreen = () => {
         })
 
 
-
     packersData.forEach(item => {
-
+     
+         //Function for Finding Distance between Two Co-ordinates using Latitude and Longitutde
         const distance = (lat1, lon1, lat2, lon2, unit) => {
             if ((lat1 == lat2) && (lon1 == lon2)) {
                 return 0;
