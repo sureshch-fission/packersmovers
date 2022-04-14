@@ -1,13 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+
 
 import React from 'react';
-import type {Node} from 'react';
+import DateTime from './DateTime';
+// import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -61,11 +56,13 @@ const App: () => Node = () => {
 
   return (
     <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar  barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <DateTime/>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <DateTime/>
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
