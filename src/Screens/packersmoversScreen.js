@@ -7,6 +7,7 @@
  * @flow strict-local
  */
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 
 import {
@@ -17,10 +18,6 @@ import {
     View,
     SafeAreaView
 } from 'react-native';
-
-//import GeoLocation from '@react-native-community/geolocation';
-import Geolocation from 'react-native-get-location';
-
 
 
 //Sample Data
@@ -58,31 +55,13 @@ const packersData = [
 //accessing users location 
 const PackersmoversScreen = () => {
 
-    const [packers, setpackers] = useState([])
-
-    const [userLatitude, setuserLatitude] = useState('');
-    const [userLongitude, setLongitude] = useState('')
-
-    const availablePackers = []
+//Array for Storing availble Packers
+const availablePackers = []
 
 
+//get users Access data
+const location = AsyncStorage.getItem('userLocation');
 
-  
-//accessing users location 
-    Geolocation.getCurrentPosition({
-        enableHighAccuracy: true,
-        timeout: 15000,
-    })
-        .then(location => {
-            setuserLatitude(location.latitude);
-            setLongitude(location.longitude);
-            console.log("location latitude", location.latitude);
-            console.log("location longitude", location.longitude);
-        })
-        .catch(error => {
-            const { code, message } = error;
-            console.warn(code, message);
-        })
 
 
     packersData.forEach(item => {
@@ -119,9 +98,9 @@ const PackersmoversScreen = () => {
                 return dist;
             }
         }
-        distance(item.Latitude, item.Longitude, userLatitude, userLongitude);
+        distance(item.Latitude, item.Longitude, location.latitude, location.longitude);
 
-        //DUMMY DATA 
+        //DUMMY DATA for available packers
         //distance(59.3293371,13.4877472,59.3225525,13.4619422)
     });
 
