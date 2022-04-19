@@ -16,7 +16,7 @@ const Login = ({ navigation }) => {
 
     console.log('onsubmit', email, password)
     const enteredEmail = JSON.parse(await AsyncStorage.getItem('email'));    // getting the values from async storage to validate the user
-    const enteredPassword = JSON.parse(await AsyncStorage.getItem('password'));   
+    const enteredPassword = JSON.parse(await AsyncStorage.getItem('password'));
 
       // for validating email and password stored in asyncstorage
     if (!email && !password) {
@@ -30,7 +30,7 @@ const Login = ({ navigation }) => {
       setPassword('');
     }
   }
-  
+
       // navigating to register page
   const onButtonPress = () => {
     navigation.navigate('Register'); //navigating back to the register page

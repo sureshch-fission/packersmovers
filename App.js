@@ -19,8 +19,9 @@ import Home from './Components/Screens/Home';
 import RegisterScreen from './Components/Screens/RegisterScreen'
 import { Provider } from './context/AuthContext';
 
+const App =  () => {
 
-//importing required components 
+//importing required components
 
 const App = () => {
 
@@ -31,6 +32,7 @@ const App = () => {
   })
     .then(location => {
       console.log("location", location);
+      AsyncStorage.setItem('userLocation', JSON.stringify(location));
     })
     .catch(error => {
       const { code, message } = error;
@@ -47,7 +49,7 @@ const App = () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen  initialRouteName='Packers' name="Packers" component={PackersmoversScreen} />
         </Stack.Navigator>
       </PaperProvider>
     </NavigationContainer>
