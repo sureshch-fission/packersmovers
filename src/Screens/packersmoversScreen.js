@@ -8,7 +8,7 @@
  */
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import {
 
@@ -98,10 +98,10 @@ const location = AsyncStorage.getItem('userLocation');
                 return dist;
             }
         }
-        distance(item.Latitude, item.Longitude, location.latitude, location.longitude);
+        //distance(item.Latitude, item.Longitude, location.latitude, location.longitude);
 
         //DUMMY DATA for available packers
-        //distance(59.3293371,13.4877472,59.3225525,13.4619422)
+        distance(59.3293371,13.4877472,59.3225525,13.4619422)
     });
 
 
@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         padding: 20,
         color: '#000',
-        backgroundColor: '#ffff',
         top: 20
 
 
@@ -176,9 +175,5 @@ const styles = StyleSheet.create({
 
 
 });
-
-
-
-
 
 export default PackersmoversScreen

@@ -7,15 +7,13 @@
  */
 
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Provider as PaperProvider, TextInput } from 'react-native-paper'
+
+import { Provider as PaperProvider} from 'react-native-paper'
 import Login from './Components/Screens/Login';
-import Register from './Components/Screens/Register'
 import { theme } from './App.style';
 import GeoLocation from 'react-native-get-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Home from './Components/Screens/Home';
 import RegisterScreen from './Components/Screens/RegisterScreen'
 import { Provider } from './context/AuthContext';
 import PackersmoversScreen from './src/Screens/packersmoversScreen';
@@ -50,7 +48,7 @@ const App =  () => {
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Packers" component={PackersmoversScreen} />
+          <Stack.Screen  initialRouteName='Packers' name="Packers" component={PackersmoversScreen} />
         </Stack.Navigator>
       </PaperProvider>
     </NavigationContainer>
@@ -58,8 +56,6 @@ const App =  () => {
   );
 }
 
-// const styles = StyleSheet.create({
 
-// });
 
 export default App;
