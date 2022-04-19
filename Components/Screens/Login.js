@@ -25,7 +25,7 @@ const Login = ({ navigation }) => {
     else if (email !== enteredEmail || password !== enteredPassword) {
       alert("Please enter Correct Information")
     } else {
-      navigation.navigate('Home');
+      navigation.navigate('Packers');
       setEmail('');
       setPassword('');
     }
