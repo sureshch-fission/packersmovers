@@ -10,13 +10,13 @@ const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')
-
+  const [allData, setAllData] = useState([]);
 
   const onSubmit = async (email, password) => {
 
- 
+    console.log('onsubmit', email, password)
     const enteredEmail = JSON.parse(await AsyncStorage.getItem('email'));    // getting the values from async storage to validate the user
-    const enteredPassword = JSON.parse(await AsyncStorage.getItem('password'));   
+    const enteredPassword = JSON.parse(await AsyncStorage.getItem('password'));
 
       // for validating email and password stored in asyncstorage
     if (!email && !password) {
@@ -25,12 +25,12 @@ const Login = ({ navigation }) => {
     else if (email !== enteredEmail || password !== enteredPassword) {
       alert("Please enter Correct Information")
     } else {
-      navigation.navigate('Packers');
+      navigation.navigate('Home');
       setEmail('');
       setPassword('');
     }
   }
-  
+
       // navigating to register page
   const onButtonPress = () => {
     navigation.navigate('Register'); //navigating back to the register page
@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
         <Card>
           <Card.Title title="Packers & Movers" titleStyle={styles.cardtitle}></Card.Title>
           <Card.Content>
-            <TextInput label="Email" keyboardType="email-address" value={email} onChangeText={text => setEmail(text)} autoCapitalize="none" autoCorrect={false}></TextInput>
+            <TextInput label="email" keyboardType="email-address" value={email} onChangeText={text => setEmail(text)} autoCapitalize="none" autoCorrect={false}></TextInput>
             <TextInput label="Password" secureTextEntry={true} value={password} onChangeText={text => setPassword(text)}></TextInput>
             <Button mode="contained" style={styles.button} onPress={() => onSubmit(email, password)}>Login</Button>
             <Button style={styles.button} onPress={onButtonPress}>Register</Button>
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     dispaly: "flex",
     alignItems: 'center',
     justifyContent: 'center',
+    //flexDirection:'row',
     backgroundColor: "rgb(101,37,131)",
     width: "100%",
     flex: 1
@@ -68,10 +69,7 @@ const styles = StyleSheet.create({
 
   },
   cardtitle: {
-    color: "rgb(101,37,131)",
-    marginVertical: 6,
-    marginHorizontal: 0
-    
+    color: "rgb(101,37,131)"
   },
   button: {
     marginVertical: 6,
