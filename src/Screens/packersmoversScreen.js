@@ -23,6 +23,8 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
+let bookedDate = []
+
 
 //Sample Data
 const packersData = [
@@ -77,17 +79,42 @@ const PackersmoversScreen = () => {
     };
 
     const handleConfirm = (date) => {
-        Alert.alert(
-            "Success",
-            " Your Packer is Booked",
-            [
+         const isbooked = bookedDate.some(data =>data.toString()===date.toString())
+         console.log("isbooked");
+        if(!isbooked){
+            bookedDate = [...bookedDate, date.toString()]
+            Alert.alert(
+                "Success",
+                ` Your Packer is Booked ${date}`,
                 
-                { text: "OK", onPress: () => console.log("OK Pressed") }
-            ]
-        );
+            
+                [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+    
+            hideDatePicker();
+            setDatePickerVisibility(false);
 
-        hideDatePicker();
-        setDatePickerVisibility(false);
+        }else{
+            Alert.alert(
+                "failed",
+                ` Oops! Your Packer is already Booked `,
+                
+            
+                [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+    
+            hideDatePicker();
+            setDatePickerVisibility(false);
+
+         }
+
+     
     };
 
 
