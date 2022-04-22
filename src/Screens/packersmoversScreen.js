@@ -171,6 +171,7 @@ const PackersmoversScreen = () => {
 
     );
 };
+
 const styles = StyleSheet.create({
     headerStyle: {
         fontSize: 25,
