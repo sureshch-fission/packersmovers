@@ -1,18 +1,21 @@
 
 
 import React from 'react';
-// import DateTime from './DateTime';
-// import type {Node} from 'react';
+import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider, TextInput } from 'react-native-paper'
 import Login from './Components/Screens/Login';
+import Register from './Components/Screens/Register'
 import { theme } from './App.style';
 import GeoLocation from 'react-native-get-location';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './Components/Screens/Home';
 import RegisterScreen from './Components/Screens/RegisterScreen'
 import { Provider } from './context/AuthContext';
 import PackersmoversScreen from './src/Screens/packersmoversScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 //importing required components
 

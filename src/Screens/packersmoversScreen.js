@@ -156,6 +156,7 @@ const PackersmoversScreen = () => {
 
         //DUMMY DATA for available packers
         distance(59.3293371, 13.4877472, 59.3225525, 13.4619422)
+      
     });
 
 
@@ -190,7 +191,7 @@ const PackersmoversScreen = () => {
 
                 )}
 
-                <Text>packers</Text>
+                
             </View>
 
         </SafeAreaView>
@@ -198,7 +199,6 @@ const PackersmoversScreen = () => {
 
     );
 };
-
 const styles = StyleSheet.create({
     headerStyle: {
         fontSize: 25,
