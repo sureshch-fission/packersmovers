@@ -6,9 +6,11 @@
  * @format
  * @flow strict-local
  */
+import DateTime from '../../DateTime';
+import React, { useState } from "react";
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React from 'react';
+
 
 import {
 
@@ -16,8 +18,12 @@ import {
     Text,
     FlatList,
     View,
-    SafeAreaView
+    SafeAreaView,
+    Alert,
+    TouchableOpacity,
 } from 'react-native';
+
+let bookedDate = []
 
 
 //Sample Data
@@ -55,18 +61,66 @@ const packersData = [
 //accessing users location 
 const PackersmoversScreen = () => {
 
-//Array for Storing availble Packers
-const availablePackers = []
+    //Array for Storing availble Packers
+    const availablePackers = []
 
 
-//get users Access data
-const location = AsyncStorage.getItem('userLocation');
+    //get users Access data
+    const location = AsyncStorage.getItem('userLocation');
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+        console.log('vikashkajsaksjd')
+    };
+
+    const hideDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+
+    const handleConfirm = (date) => {
+         const isbooked = bookedDate.some(data =>data.toString()===date.toString())
+         console.log("isbooked");
+        if(!isbooked){
+            bookedDate = [...bookedDate, date.toString()]
+            Alert.alert(
+                "Success",
+                ` Your Packer is Booked ${date}`,
+                
+            
+                [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+    
+            hideDatePicker();
+            setDatePickerVisibility(false);
+
+        }else{
+            Alert.alert(
+                "failed",
+                ` Oops! Your Packer is already Booked `,
+                
+            
+                [
+                    
+                    { text: "OK", onPress: () => console.log("OK Pressed") }
+                ]
+            );
+    
+            hideDatePicker();
+            setDatePickerVisibility(false);
+
+         }
+
+     
+    };
 
 
     packersData.forEach(item => {
-     
-         //Function for Finding Distance between Two Co-ordinates using Latitude and Longitutde
+
+        //Function for Finding Distance between Two Co-ordinates using Latitude and Longitutde
         const distance = (lat1, lon1, lat2, lon2, unit) => {
             if ((lat1 == lat2) && (lon1 == lon2)) {
                 return 0;
@@ -101,7 +155,8 @@ const location = AsyncStorage.getItem('userLocation');
         //distance(item.Latitude, item.Longitude, location.latitude, location.longitude);
 
         //DUMMY DATA for available packers
-        distance(59.3293371,13.4877472,59.3225525,13.4619422)
+        distance(59.3293371, 13.4877472, 59.3225525, 13.4619422)
+      
     });
 
 
@@ -120,12 +175,23 @@ const location = AsyncStorage.getItem('userLocation');
                 ) : (
                     <View>
                         <Text style={styles.headerStyle}>Available Packers in Your Location</Text>
-                        <FlatList data={availablePackers} renderItem={({ item }) => <Text style={styles.packerStyle}>{item.Name}</Text>} keyExtractor={item => item.id} />
+                        <FlatList
+                            data={availablePackers}
+                            renderItem={({ item }) =>{
+                                console.log(item)
+                                return <TouchableOpacity onPress={showDatePicker}>
+                                    <Text style={styles.packerStyle} >{item.Name}</Text>
+                                </TouchableOpacity>}
+                            }
+                            keyExtractor={item => item.id} />
+                            <DateTime handleConfirm={handleConfirm} hideDatePicker={hideDatePicker} isDatePickerVisible={isDatePickerVisible} />
+
+
                     </View>
 
                 )}
 
-
+                
             </View>
 
         </SafeAreaView>
