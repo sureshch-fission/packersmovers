@@ -12,7 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './Components/Screens/Home';
 import RegisterScreen from './Components/Screens/RegisterScreen'
 import { Provider } from './context/AuthContext';
-import PackersmoversScreen from './src/Screens/packersmoversScreen';
+import PackersmoversScreen from './src/screens/PackersmoversScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -27,8 +27,10 @@ const App = () => {
     timeout: 15000,
   })
     .then(location => {
-      console.log("location", location);
+      
       AsyncStorage.setItem('userLocation', JSON.stringify(location));
+      console.log(location)
+
     })
     .catch(error => {
       const { code, message } = error;
