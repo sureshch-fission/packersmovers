@@ -31,14 +31,14 @@ const packersData = [
     {
         Name: 'Packer-1',
         Id: 1,
-        Longitude: 37.4220308,
-        Latitude: 122.0839882,
+        Longitude: 8742199,
+        Latitude: 1220,
     },
     {
         Name: 'Packer-2',
         Id: 2,
-        Longitude: 37.4220308,
-        Latitude: 122.0839882,
+        Longitude: 41.40338,
+        Latitude: 2.17403,
     },
 
     {
@@ -59,14 +59,28 @@ const packersData = [
 
 
 //accessing users location 
-const PackersmoversScreen = () => {
+const PackersmoversScreen = async () => {
 
     //Array for Storing availble Packers
     const availablePackers = []
 
+    const [latitude, setlatitude] = useState('')
+    const [longitude, setlongitude] = useState('')
 
     //get users Access data
-    const location = AsyncStorage.getItem('userLocation');
+    const getData = async () => {
+
+        const userLatitude = await AsyncStorage.getItem('userLatitude')
+        const userLongitude = await AsyncStorage.getItem('userLongitude')
+        setlatitude(userLatitude)
+        setlongitude(userLongitude)
+
+
+
+    }
+    getData()
+
+
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
     const showDatePicker = () => {
@@ -79,49 +93,49 @@ const PackersmoversScreen = () => {
     };
 
     const handleConfirm = (date) => {
-         const isbooked = bookedDate.some(data =>data.toString()===date.toString())
-         console.log("isbooked");
-        if(!isbooked){
+        const isbooked = bookedDate.some(data => data.toString() === date.toString())
+        console.log("isbooked");
+        if (!isbooked) {
             bookedDate = [...bookedDate, date.toString()]
             Alert.alert(
                 "Success",
                 ` Your Packer is Booked ${date}`,
-                
-            
+
+
                 [
-                    
+
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                 ]
             );
-    
+
             hideDatePicker();
             setDatePickerVisibility(false);
 
-        }else{
+        } else {
             Alert.alert(
                 "failed",
                 ` Oops! Your Packer is already Booked `,
-                
-            
+
+
                 [
-                    
+
                     { text: "OK", onPress: () => console.log("OK Pressed") }
                 ]
             );
-    
+
             hideDatePicker();
             setDatePickerVisibility(false);
 
-         }
+        }
 
-     
+
     };
 
 
     packersData.forEach(item => {
 
         //Function for Finding Distance between Two Co-ordinates using Latitude and Longitutde
-        const distance = (lat1, lon1, lat2, lon2, unit) => {
+        const distance = (lat1, lon1, lat2, lon2) => {
             if ((lat1 == lat2) && (lon1 == lon2)) {
                 return 0;
             }
@@ -152,15 +166,14 @@ const PackersmoversScreen = () => {
                 return dist;
             }
         }
-        //distance(item.Latitude, item.Longitude, location.latitude, location.longitude);
+        distance(item.Latitude, item.Longitude, latitude, longitude);
 
         //DUMMY DATA for available packers
-        distance(59.3293371, 13.4877472, 59.3225525, 13.4619422)
-      
+        // distance(59.3293371, 13.4877472,59.3293371, 13.4877472 )
+
     });
 
 
-    console.log(availablePackers)
     return (
 
         <SafeAreaView>
@@ -177,21 +190,22 @@ const PackersmoversScreen = () => {
                         <Text style={styles.headerStyle}>Available Packers in Your Location</Text>
                         <FlatList
                             data={availablePackers}
-                            renderItem={({ item }) =>{
-                                console.log(item)
+                            renderItem={({ item }) => {
+
                                 return <TouchableOpacity onPress={showDatePicker}>
                                     <Text style={styles.packerStyle} >{item.Name}</Text>
-                                </TouchableOpacity>}
+                                </TouchableOpacity>
+                            }
                             }
                             keyExtractor={item => item.id} />
-                            <DateTime handleConfirm={handleConfirm} hideDatePicker={hideDatePicker} isDatePickerVisible={isDatePickerVisible} />
+                        <DateTime handleConfirm={handleConfirm} hideDatePicker={hideDatePicker} isDatePickerVisible={isDatePickerVisible} />
 
 
                     </View>
 
                 )}
 
-                
+
             </View>
 
         </SafeAreaView>
@@ -233,7 +247,6 @@ const styles = StyleSheet.create({
     },
     content: {
         display: 'flex',
-
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%'
