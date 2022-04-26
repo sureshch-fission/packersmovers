@@ -10,6 +10,12 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RegisterScreen from './src/Screens/RegisterScreen';
 // import {Provider} from './context/AuthContext';
 import PackersmoversScreen from './src/Screens/packersmoversScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './Components/Screens/Home';
+import RegisterScreen from './Components/Screens/RegisterScreen'
+import { Provider } from './context/AuthContext';
+import PackersmoversScreen from './src/screens/PackersmoversScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //importing required components
