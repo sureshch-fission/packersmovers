@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import React, { useState, useContext } from 'react';
 import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import { Appbar, Button, TextInput, ThemeProvider } from 'react-native-paper';
-import { theme } from '../../App.style';
+import { theme } from '../../../App.style';
 
 
 const Register = ({ onSubmit, initialValues }) => {
