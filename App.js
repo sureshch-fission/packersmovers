@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     // returning the Views
-    <Provider>
+    <>
       <NavigationContainer>
         <PaperProvider theme={theme}>
           <Stack.Navigator initialRouteName="Login">
@@ -47,7 +47,7 @@ const App = () => {
           </Stack.Navigator>
         </PaperProvider>
       </NavigationContainer>
-    </Provider>
+    </>
   );
 };
 

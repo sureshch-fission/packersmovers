@@ -22,7 +22,6 @@ const Login = ({navigation}) => {
       Alert.alert('Please enter Correct Information');
     } else {
       navigation.navigate('Packers');
-
       setEmail('');
       setPassword('');
     }
@@ -32,7 +31,6 @@ const Login = ({navigation}) => {
   const onButtonPress = () => {
     navigation.navigate('Register'); //navigating back to the register page
   };
-
   return (
     <SafeAreaView style={styles.content}>
       <View style={styles.view}>
