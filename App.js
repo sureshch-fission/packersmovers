@@ -1,15 +1,12 @@
 import React from 'react';
-import {Provider as PaperProvider} from 'react-native-paper';
-import Login from './src/Screens/Login';
-// import Register from './Components/Screens/Register';
-import {theme} from './AppStyle';
+import { Provider as PaperProvider } from 'react-native-paper'
+import Login from './Components/Screens/Login';
+import { theme } from './App.style';
 import GeoLocation from 'react-native-get-location';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import Home from './Components/Screens/Home';
-import RegisterScreen from './src/Screens/RegisterScreen';
-// import {Provider} from './context/AuthContext';
-import PackersmoversScreen from './src/Screens/packersmoversScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RegisterScreen from './Components/Screens/RegisterScreen'
+import PackersmoversScreen from './src/screens/PackersmoversScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //importing required components
@@ -21,9 +18,12 @@ const App = () => {
     timeout: 15000,
   })
     .then(location => {
-      console.log('location', location);
-      AsyncStorage.setItem('userLongitude', JSON.stringify(location.longitude));
+      
+      // AsyncStorage.setItem('userLocation', JSON.stringify(location));
+      // console.log(location)
       AsyncStorage.setItem('userLatitude', JSON.stringify(location.latitude));
+      AsyncStorage.setItem('userLongitude', JSON.stringify(location.longitude));
+
     })
     .catch(error => {
       const {code, message} = error;
