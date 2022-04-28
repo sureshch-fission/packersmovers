@@ -2,16 +2,15 @@ import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Alert} from 'react-native';
 import {Card} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {TextInputs} from '../components/TextInputs';
-import ButtonComponent from '../components/Buttons';
+import {TextInputs} from '../components/TextInputComponent';
+import ButtonComponent from '../components/ButtonComponent';
 const Login = ({navigation}) => {
   //useState for storing inputs
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [allData, setAllData] = useState([]);
 
-  const onSubmit = async (useremail, userpassword) => {
+  const onSubmit = async (email, password) => {
     console.log('onsubmit', email, password);
     const enteredEmail = JSON.parse(await AsyncStorage.getItem('email')); // getting the values from async storage to validate the user
     const enteredPassword = JSON.parse(await AsyncStorage.getItem('password'));
@@ -36,7 +35,9 @@ const Login = ({navigation}) => {
     <SafeAreaView style={styles.content}>
       <View style={styles.view}>
         <Card>
-          <Card.Title title="Packers & Movers" titleStyle={styles.cardtitle} />
+          <Card.Title
+            title="Packers & Movers"
+            titleStyle={styles.cardtitle}></Card.Title>
           <Card.Content>
             <TextInputs
               label="Email"
@@ -72,12 +73,10 @@ const styles = StyleSheet.create({
     dispaly: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    //flexDirection:'row',
     backgroundColor: 'rgb(101,37,131)',
     width: '100%',
     flex: 1,
-  },
-  login: {
-    backgroundColor: 'white',
   },
   view: {
     width: '80%',

@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import ButtonComponent from '../components/Buttons';
-import {TextInputs} from '../components/TextInputs';
+import {theme} from '../../App.style';
+import ButtonComponent from '../components/ButtonComponent';
+import {TextInputs} from '../components/TextInputComponent';
 
 const Register = ({onSubmit, initialValues}) => {
   const [username, setUsername] = useState(initialValues.username);
@@ -55,14 +56,14 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     height: '100%',
   },
-  // icon: {
-  //   color: theme.colors.primary,
-  // },
-  // button: {
-  //   marginHorizontal: 0,
-  //   marginVertical: 15,
-  //   // backgroundColor: 'rgb(101,37,131)',
-  // },
+  icon: {
+    color: theme.colors.primary,
+  },
+  button: {
+    marginHorizontal: 0,
+    marginVertical: 15,
+    backgroundColor: 'rgb(101,37,131)',
+  },
 });
 
 export default Register;
